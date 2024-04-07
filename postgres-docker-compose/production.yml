@@ -1,0 +1,17 @@
+version: "3"
+
+volumes:
+  production_postgres_data: {}
+  production_postgres_data_backups: {}
+
+services:
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/production/postgres/Dockerfile
+    image: production_postgres
+    volumes:
+      - production_postgres_data:/var/lib/postgresql/data
+      - production_postgres_data_backups:/backups
+    env_file:
+      - ./.envs/.production/.postgres
